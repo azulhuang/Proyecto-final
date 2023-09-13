@@ -21,15 +21,45 @@ function saludar() {
 
 saludar();
 
+
+
+const products = [
+    { imageUrl: "../assets/collar_Miku.jpeg", product: "Collar Miku", price: 3000, description: "Collar de plata 925", code: 1, stock: 100 },
+    { imageUrl: "../assets/lovering.jpeg", product: "Love ring", price: 2700, description: "anillo de plata 925", code: 2, stock: 100 },
+    { imageUrl: "../assets/destiny.jpeg", product: "Destiny bracelet", price: 4500, description: "pulsera de plata 925", code: 3, stock: 100 },
+    { imageUrl: "../assets/sakura.jpeg", product: "Sakura", price: 5000, description: "Aretes de plata 925", code: 4, stock: 100 },
+];
+
 const contenedor = document.getElementById("contenedor");
 
 const divRow = document.createElement('div');
 divRow.classList.add('row', 'w-100');
 
+
+
+for (const product of products) {
+    const divCard = document.createElement('div');
+    divCard.classList.add('card', 'col-3');
+    divCard.innerHTML = `
+        <div class='card-body'>
+        <img src="${product.imageUrl}" class='card-img-top' alt="${product.product}"/>
+        <li>Product: ${product.product}</li>
+        <li>Price: ${product.price}</li>
+        <li>Description: ${product.description}</li>
+        <li>Stock: ${product.stock}</li>
+        <div class='card.footer'>
+            <button class='btn btn-outline-dark w-100' id=${product.code}>Add cart</button>
+            
+
+        </div>
+    `;
+    divRow.appendChild(divCard);
+}
+
 contenedor.appendChild(divRow);
 let productosElegidos = [];
 
-function llenarCarrito(products) {
+function llenarCarrito() {
     const botones = document.querySelectorAll('button.btn');
     const carritoCantidad = document.querySelector("span.carritoCantidad");
 
@@ -48,7 +78,7 @@ function llenarCarrito(products) {
             })
             .then((result) => {
                 if (result.isConfirmed) {
-                    const productoElegido = productos.find((product) => product.code === parseInt(e.target.id));
+                    const productoElegido = products.find((product) => product.code === parseInt(e.target.id));
                     productosElegidos.push(productoElegido);
                     console.table(productosElegidos);
                     carritoCantidad.textContent = productosElegidos.length;
@@ -66,57 +96,6 @@ function llenarCarrito(products) {
 }
 
 llenarCarrito();
-// ... (Your existing code)
-
-const datos = "js/products.json"
-
-async function fetchProductData() {
-    try {
-        const response = await fetch(datos); // Assuming products.json is in the same directory as your HTML file
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching product data:', error);
-        return []; // Return an empty array in case of an error
-    }
-}
-
-async function loadProductData() {
-    const products = await fetchProductData();
-    
-    if (products.length === 0) {
-        // Handle the case where no products were fetched or an error occurred
-        console.error('No products were fetched or an error occurred.');
-        return;
-    }
-    
-    const divRow = document.querySelector('.row.w-100');
-    
-    for (const product of products) {
-        const divCard = document.createElement('div');
-        divCard.classList.add('card', 'col-3');
-        divCard.innerHTML = `
-        <div class='card-body'>
-        <img src="${product.imageUrl}" class='card-img-top' alt="${product.product}"/>
-        <li>Product: ${product.product}</li>
-        <li>Price: ${product.price}</li>
-        <li>Description: ${product.description}</li>
-        <li>Stock: ${product.stock}</li>
-        <div class='card.footer'>
-        <button class='btn btn-outline-dark w-100' id=${product.code}>Add cart</button>
-        </div>
-        `;
-        divRow.appendChild(divCard);
-    }
-}
-
-// Call the loadProductData function to fetch and render the products
-loadProductData();
-llenarCarrito();
-
-
 
 
 
