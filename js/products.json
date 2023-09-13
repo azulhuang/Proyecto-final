@@ -1,0 +1,34 @@
+[
+    {
+        "imageUrl": "../assets/collar_Miku.jpeg",
+        "product": "Collar Miku",
+        "price": 3000,
+        "description": "Collar de plata 925",
+        "code": 1,
+        "stock": 100
+    },
+    {
+        "imageUrl": "../assets/lovering.jpeg",
+        "product": "Love ring",
+        "price": 2700,
+        "description": "anillo de plata 925",
+        "code": 2,
+        "stock": 100
+    },
+    {
+        "imageUrl": "../assets/destiny.jpeg",
+        "product": "Destiny bracelet",
+        "price": 4500,
+        "description": "pulsera de plata 925",
+        "code": 3,
+        "stock": 100
+    },
+    {
+        "imageUrl": "../assets/sakura.jpeg",
+        "product": "Sakura",
+        "price": 5000,
+        "description": "Aretes de plata 925",
+        "code": 4,
+        "stock": 100
+    }
+]
